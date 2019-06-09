@@ -13,7 +13,7 @@ resource "aws_cloudwatch_metric_alarm" "billing" {
   period              = 6 * 60 * 60
   statistic           = "Maximum"
   threshold           = "9"
-  #alarm_actions       = "${aws_sns_topic.billing.arn}"
+  #alarm_actions       = aws_sns_topic.billing.arn
   treat_missing_data = "missing"
 
 

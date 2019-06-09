@@ -1,5 +1,5 @@
 resource "aws_security_group" "ecs-securitygroup" {
-  vpc_id = "${aws_vpc.main.id}"
+  vpc_id = aws_vpc.main.id
   name = "ecs"
   description = "security group for ecs"
   egress {
@@ -13,7 +13,7 @@ resource "aws_security_group" "ecs-securitygroup" {
       from_port = 3000
       to_port = 3000
       protocol = "tcp"
-      security_groups = ["${aws_security_group.myapp-elb-securitygroup.id}"]
+      security_groups = [aws_security_group.myapp-elb-securitygroup.id]
   } 
   ingress {
       from_port = 22
@@ -26,7 +26,7 @@ resource "aws_security_group" "ecs-securitygroup" {
   }
 }
 resource "aws_security_group" "myapp-elb-securitygroup" {
-  vpc_id = "${aws_vpc.main.id}"
+  vpc_id = aws_vpc.main.id
   name = "myapp-elb"
   description = "security group for ecs"
   egress {
@@ -48,7 +48,7 @@ resource "aws_security_group" "myapp-elb-securitygroup" {
 }
 # jenkins
 resource "aws_security_group" "jenkins-securitygroup" {
-  vpc_id = "${aws_vpc.main.id}"
+  vpc_id = aws_vpc.main.id
   name = "jenkins-securitygroup"
   description = "security group that allows ssh and all egress traffic"
   egress {

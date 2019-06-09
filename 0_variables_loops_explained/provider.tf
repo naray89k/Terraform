@@ -5,7 +5,7 @@ provider "aws" {
 }
 
 # resource "aws_vpc" "captain" {
-#   cidr_block = "${var.vpc_cidr}"
+#   cidr_block = var.vpc_cidr
 #   instance_tenancy = "default"
 #   tags {
 #     Name = "Main"
@@ -14,12 +14,12 @@ provider "aws" {
 # }
 #
 # resource "aws_subnet" "subnets" {
-#   count = "${length(data.aws_availability_zones.azs.names)}"
-#   availability_zone = "${element(data.aws_availability_zones.azs.names,count.index)}"
-#   vpc_id = "${aws_vpc.captain.id}"
-#   cidr_block = "${element(var.subnet_cidr,count.index)}"
+#   count = length(data.aws_availability_zones.azs.names)
+#   availability_zone = element(data.aws_availability_zones.azs.names,count.index)
+#   vpc_id = aws_vpc.captain.id
+#   cidr_block = element(var.subnet_cidr,count.index)
 #   tags {
-#     Name = "Subnet-${count.index+1}"
+#     Name = "Subnet-${count.index+1
 #   }
 # }
 
