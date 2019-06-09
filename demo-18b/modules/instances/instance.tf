@@ -31,27 +31,27 @@ data "aws_ami" "ubuntu" {
 }
 
 resource "aws_instance" "instance" {
-  ami           = "${data.aws_ami.ubuntu.id}"
-  instance_type = "${var.INSTANCE_TYPE}"
+  ami           = data.aws_ami.ubuntu.id
+  instance_type = var.INSTANCE_TYPE
 
   # the VPC subnet
-  subnet_id = "${var.PUBLIC_SUBNETS[0]}"
+  subnet_id = var.PUBLIC_SUBNETS[0]
 
   # the security group
-  vpc_security_group_ids = ["${aws_security_group.allow-ssh.id}"]
+  vpc_security_group_ids = [aws_security_group.allow-ssh.id]
 
   # the public SSH key
-  key_name = "${aws_key_pair.mykeypair.key_name}"
+  key_name = aws_key_pair.mykeypair.key_name
 
   tags {
-    Name         = "instance-${var.ENV}"
-    Environmnent = "${var.ENV}"
+    Name         = "instance-${var.ENV
+    Environmnent = var.ENV
   }
 }
 
 resource "aws_security_group" "allow-ssh" {
-  vpc_id      = "${var.VPC_ID}"
-  name        = "allow-ssh-${var.ENV}"
+  vpc_id      = var.VPC_ID
+  name        = "allow-ssh-${var.ENV
   description = "security group that allows ssh and all egress traffic"
 
   egress {
@@ -70,11 +70,11 @@ resource "aws_security_group" "allow-ssh" {
 
   tags {
     Name         = "allow-ssh"
-    Environmnent = "${var.ENV}"
+    Environmnent = var.ENV
   }
 }
 
 resource "aws_key_pair" "mykeypair" {
-  key_name   = "mykeypair-${var.ENV}"
-  public_key = "${file("${path.root}/${var.PATH_TO_PUBLIC_KEY}")}"
+  key_name   = "mykeypair-${var.ENV
+  public_key = file(path.root}/${var.PATH_TO_PUBLIC_KEY)
 }

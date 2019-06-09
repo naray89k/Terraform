@@ -1,5 +1,5 @@
 resource "aws_security_group" "app-prod" {
-  vpc_id = "${aws_vpc.main.id}"
+  vpc_id = aws_vpc.main.id
   name = "application - production"
   description = "security group for my app"
   egress {
@@ -22,14 +22,14 @@ resource "aws_security_group" "app-prod" {
   }
 }
 resource "aws_security_group" "allow-mariadb" {
-  vpc_id = "${aws_vpc.main.id}"
+  vpc_id = aws_vpc.main.id
   name = "allow-mariadb"
   description = "allow-mariadb"
   ingress {
       from_port = 3306
       to_port = 3306
       protocol = "tcp"
-      security_groups = ["${aws_security_group.app-prod.id}"]              # allowing access from our example instance
+      security_groups = [aws_security_group.app-prod.id]              # allowing access from our example instance
   }
   egress {
       from_port = 0
