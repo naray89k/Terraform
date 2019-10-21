@@ -45,6 +45,6 @@ resource "aws_security_group" "elb-securitygroup" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {
-    Name = "elb"
+    Name = "elb-sg"
   }
 }

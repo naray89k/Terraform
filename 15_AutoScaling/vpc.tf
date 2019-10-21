@@ -58,7 +58,6 @@ resource "aws_route_table" "main-public" {
   }
 }
 
-# # route associations public
 # route associations public
 resource "aws_route_table_association" "main-public" {
   count          = length(aws_subnet.public_subnets)

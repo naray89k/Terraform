@@ -1,21 +1,40 @@
-resource "aws_iam_role" "demo-cluster" {
-  name = "terraform-eks-demo-cluster"
+data "aws_iam_policy_document" "eks-assume-role-policy" {
+  statement {
+    actions = ["sts:AssumeRole"]
 
-  assume_role_policy = <<POLICY
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Principal": {
-        "Service": "eks.amazonaws.com"
-      },
-      "Action": "sts:AssumeRole"
+    principals {
+      type        = "Service"
+      identifiers = ["eks.amazonaws.com"]
     }
-  ]
+  }
 }
-POLICY
+
+
+resource "aws_iam_role" "demo-cluster" {
+  name               = "terraform-eks-demo-cluster"
+  assume_role_policy = data.aws_iam_policy_document.eks-assume-role-policy.json
 }
+
+
+# resource "aws_iam_role" "demo-cluster" {
+#   name = "terraform-eks-demo-cluster"
+#
+#   assume_role_policy = <<POLICY
+# {
+#   "Version": "2012-10-17",
+#   "Statement": [
+#     {
+#       "Effect": "Allow",
+#       "Principal": {
+#         "Service": "eks.amazonaws.com"
+#       },
+#       "Action": "sts:AssumeRole"
+#     }
+#   ]
+# }
+# POLICY
+#
+# }
 
 resource "aws_iam_role_policy_attachment" "demo-cluster-AmazonEKSClusterPolicy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
@@ -51,4 +70,5 @@ resource "aws_iam_role_policy" "demo-cluster-service-linked-role" {
     ]
 }
 EOF
+
 }

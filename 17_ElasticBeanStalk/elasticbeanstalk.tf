@@ -15,7 +15,7 @@ resource "aws_elastic_beanstalk_environment" "app-prod" {
   setting {
     namespace = "aws:ec2:vpc"
     name      = "Subnets"
-    value     = "${aws_subnet.private_subnets[0].id},${aws_subnet.private_subnets[1].id}"
+    value     = join(",", [for e in slice(aws_subnet.private_subnets, 0, 2) : e.id])
   }
   setting {
     namespace = "aws:ec2:vpc"
@@ -55,7 +55,7 @@ resource "aws_elastic_beanstalk_environment" "app-prod" {
   setting {
     namespace = "aws:ec2:vpc"
     name      = "ELBSubnets"
-    value     = "${aws_subnet.public_subnets[0].id},${aws_subnet.public_subnets[1].id}"
+    value     = join(",", [for e in slice(aws_subnet.public_subnets, 0, 2) : e.id])
   }
   setting {
     namespace = "aws:elb:loadbalancer"
