@@ -1,19 +1,10 @@
 resource "aws_instance" "example" {
-  ami           = lookup(var.AMIS, var.AWS_REGION)
-  instance_type = "t2.micro"
-
-  # the VPC subnet
-  subnet_id = aws_subnet.pub_subnets[0].id
-
-  # the security group
+  ami                    = var.AMIS[var.AWS_REGION]
+  instance_type          = "t2.micro"
+  subnet_id              = aws_subnet.pub_subnets[0].id
   vpc_security_group_ids = [aws_security_group.allow-ssh.id]
-
-  # the public SSH key
-  key_name = aws_key_pair.mykeypair.key_name
-
-  # user data
-  user_data = data.template_cloudinit_config.cloudinit-example.rendered
-
+  key_name               = aws_key_pair.mykeypair.key_name
+  user_data              = data.template_cloudinit_config.cloudinit-example.rendered
 }
 
 resource "aws_ebs_volume" "ebs-volume-1" {

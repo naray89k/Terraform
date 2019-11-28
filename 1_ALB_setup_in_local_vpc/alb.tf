@@ -15,7 +15,9 @@ resource "aws_lb_target_group" "group" {
   protocol = "HTTP"
   vpc_id   = aws_default_vpc.default.id
   stickiness {
-    type = "lb_cookie"
+    type            = "lb_cookie"
+    cookie_duration = "15"
+    enabled         = true
   }
   # Alter the destination of the health check to be the login page.
   health_check {
@@ -25,8 +27,9 @@ resource "aws_lb_target_group" "group" {
 }
 
 resource "aws_lb_target_group_attachment" "attachment" {
+  count            = length(aws_instance.example)
   target_group_arn = aws_lb_target_group.group.arn
-  target_id        = aws_instance.example.id
+  target_id        = aws_instance.example[count.index].id
   port             = 80
 }
 

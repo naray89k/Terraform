@@ -1,6 +1,3 @@
-variable "AWS_ACCESS_KEY" {}
-variable "AWS_SECRET_KEY" {}
-
 # AWS REGION
 variable "AWS_REGION" {
   type    = string
@@ -11,9 +8,10 @@ variable "AWS_REGION" {
 variable "AMIS" {
   type = map
   default = {
-    us-east-1  = "ami-020a9a7369c26052b"
-    us-west-2  = "ami-0ddba1929e996e2dc"
-    eu-west-2  = "ami-00a1270ce1e007c27"
+    us-east-1 = "ami-020a9a7369c26052b"
+    us-west-2 = "ami-0ddba1929e996e2dc"
+    # eu-west-2 = "ami-00a1270ce1e007c27"
+    eu-west-2  = "ami-0be057a22c63962cb"
     ap-south-1 = "ami-54d2a63b"
   }
 }
@@ -27,7 +25,8 @@ variable "PATH_TO_PUBLIC_KEY" {
 }
 
 variable "INSTANCE_USERNAME" {
-  default = "ec2-user"
+  default = "ubuntu"
+  # default = "ec2-user"
 }
 
 data "aws_availability_zones" "azs" {}
