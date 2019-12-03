@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
-    bucket = "terraform-state-8989"
-    key    = "terraform/demo4"
-    region = "ap-south-1"
+    bucket = "tf-state-8989"
+    key    = "terraform/remote_state_example"
+    region = "eu-west-2"
   }
 }
