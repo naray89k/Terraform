@@ -30,3 +30,11 @@ variable "INSTANCE_USERNAME" {
 }
 
 data "aws_availability_zones" "azs" {}
+
+data "aws_sns_topic" "cpu_monitor_sns" {
+  name = "cpu_monitor_notification"
+}
+
+variable "EMAIL" {
+  default = "narayanan.k.8994@gmail.com"
+}

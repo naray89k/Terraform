@@ -1,0 +1,24 @@
+Creation of SNS Topic:
+    Syntax:
+        aws sns create-topic --name "<Friendly Name of SNS Topic>"
+    Example:
+        aws sns create-topic --name "EC2 CPU-Utilization-Notification"
+
+Creation of Subscription:
+    Syntax:
+        aws sns subscribe --topic-arn <ARN from previous command> --protocol email --notification-endpoint <email-id>
+
+    Example:
+        aws sns subscribe --topic-arn arn:aws:sns:us-west-2:0123456789012:my-topic --protocol email --notification-endpoint narayanan.k.8994@gmail.com
+
+
+Getting the details of CloudWatch:
+    Syntax:
+        aws cloudwatch list-metrics
+    Example:
+        aws cloudwatch list-metrics
+
+
+===================================
+python3 -m http.server
+python3 -m http.server 5000

@@ -5,7 +5,7 @@
 # systemctl start httpd.service
 # systemctl enable httpd.service
 apt-get update
-apt-get install -y apache2
+apt-get install -y apache2 stress
 systemctl enable apache2
 systemctl stop apache2
 sleep 60
