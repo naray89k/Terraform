@@ -4,10 +4,10 @@ resource "aws_key_pair" "mykey" {
 }
 
 resource "aws_instance" "example" {
-  count                  = length(data.aws_availability_zones.azs.names)
+  #count                  = length(data.aws_availability_zones.azs.names)
   ami                    = lookup(var.AMIS, var.AWS_REGION)
   instance_type          = "t2.micro"
-  availability_zone      = element(data.aws_availability_zones.azs.names, count.index)
+  #availability_zone      = element(data.aws_availability_zones.azs.names, count.index)
   vpc_security_group_ids = [aws_security_group.allow-ssh.id]
   key_name               = aws_key_pair.mykey.key_name
   # provisioner "file" {
@@ -27,8 +27,8 @@ resource "aws_instance" "example" {
   #   private_key = file(var.PATH_TO_PRIVATE_KEY)
   # }
   tags = {
-    Name = "Instance-${count.index + 1}"
-    # Name = "Vaanathi-Instance"
+    #Name = "Instance-${count.index + 1}"
+     Name = "Vaanathi-Instance"
   }
 }
 
